@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ImageSearchApp</string>
+    <string name="logo">Electrolux</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_images">Search images by type here</string>
+    <string name="images_library_using_flikr">Images Library using Flikr</string>
+    <string name="results">%1$d results</string>
+</resources>
