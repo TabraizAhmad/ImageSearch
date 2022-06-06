@@ -1,13 +1,17 @@
 package com.electrolux.imagesearchapp.di
 
+import android.content.Context
 import com.electrolux.imagesearchapp.BuildConfig
 import com.electrolux.imagesearchapp.network.remote.DefaultIntercepter
 import com.electrolux.imagesearchapp.network.remote.FlickrApiService
 import com.electrolux.imagesearchapp.utils.Constants.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,5 +58,22 @@ object ApiModule {
     @Singleton
     fun provideFlickrApiService(retrofit: Retrofit): FlickrApiService {
         return retrofit.create(FlickrApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttp3Downloader(client: OkHttpClient) : OkHttp3Downloader {
+        return OkHttp3Downloader(client);
+    }
+
+    @Provides
+    @Singleton
+    fun providePicassoClient(
+        @ApplicationContext appContext: Context,
+        okHttp3Downloader: OkHttp3Downloader
+    ): Picasso {
+        return Picasso.Builder(appContext).downloader(okHttp3Downloader).build().apply {
+            isLoggingEnabled = true
+        }
     }
 }

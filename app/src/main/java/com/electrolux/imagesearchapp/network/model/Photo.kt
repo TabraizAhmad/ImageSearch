@@ -14,7 +14,7 @@ data class Photo (
     @SerializedName("ispublic" ) var ispublic : Int?    = null,
     @SerializedName("isfriend" ) var isfriend : Int?    = null,
     @SerializedName("isfamily" ) var isfamily : Int?    = null,
-    @SerializedName("url_m"    ) var urlM     : String? = null,
+    @SerializedName("url_q"    ) var urlQ     : String? = null,
     @SerializedName("height_m" ) var heightM  : Int?    = null,
     @SerializedName("width_m"  ) var widthM   : Int?    = null
 

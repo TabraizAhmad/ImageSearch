@@ -18,8 +18,7 @@ class DefaultIntercepter:Interceptor {
             .addQueryParameter("method","flickr.photos.search")
             .addQueryParameter("format","json")
             .addQueryParameter("extras","media")
-            .addQueryParameter("extras","url_sq")
-            .addQueryParameter("extras","url_m")
+            .addQueryParameter("extras","url_q")
             .addQueryParameter("nojsoncallback","true")
             .build()
 

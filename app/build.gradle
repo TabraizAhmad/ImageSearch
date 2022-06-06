@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         //can move to release and debug for different keys
-        buildConfigField("String", "FLICKR_ACCESS_KEY", '"ab53604cb4b8528dfe63745b73cc3cb4"')
+        buildConfigField("String", "FLICKR_ACCESS_KEY", '"48bb0c001437d890e19a8e34d42b2a2c"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

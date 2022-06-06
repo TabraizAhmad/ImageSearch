@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import com.electrolux.imagesearchapp.databinding.FragmentSearchImageBinding
 import com.electrolux.imagesearchapp.network.model.Photo
 import com.electrolux.imagesearchapp.utils.DebouncingTextChangeListener
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
+import javax.inject.Inject
 
 @WithFragmentBindings
 @AndroidEntryPoint
@@ -24,6 +26,8 @@ class SearchImageFragment : Fragment(), ImageRVAdapter.OnItemClicked {
     //binding for searching views
     private lateinit var binding: FragmentSearchImageBinding
 
+    @Inject
+    lateinit var picasso: Picasso
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,16 +57,16 @@ class SearchImageFragment : Fragment(), ImageRVAdapter.OnItemClicked {
     private fun initializeRV() {
 
 
-        val repoRVAdapter = ImageRVAdapter(this  )
+        val imageRVAdapter = ImageRVAdapter(this,picasso  )
         binding.apply {
 
-            imageListRV.adapter = repoRVAdapter
+            imageListRV.adapter = imageRVAdapter
             viewModel.searchApiResponseLD.observe(viewLifecycleOwner) { resource ->
-                repoRVAdapter.submitData(viewLifecycleOwner.lifecycle, resource)
+                imageRVAdapter.submitData(viewLifecycleOwner.lifecycle, resource)
             }
         }
 
-        binding.searchQueryET.setText("Electrolux");
+        //binding.searchQueryET.setText("Electrolux");
 
     }
 
