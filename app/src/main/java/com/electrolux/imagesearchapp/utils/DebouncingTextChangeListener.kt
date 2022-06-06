@@ -12,6 +12,7 @@ internal class DebouncingTextChangeListener(
     lifecycle: Lifecycle,
     private val onDebouncingTextChange: (String?) -> Unit
 ) : TextWatcher {
+    // period in miliseconds to wait
     var debouncePeriod: Long = 500
 
     private val coroutineScope = lifecycle.coroutineScope
@@ -33,6 +34,7 @@ internal class DebouncingTextChangeListener(
         searchJob?.cancel()
         searchJob = coroutineScope.launch {
             s?.let {
+                //wait for the period to invoke TextChange
                 delay(debouncePeriod)
                 onDebouncingTextChange(s.toString())
             }

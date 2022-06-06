@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.electrolux.imagesearchapp.databinding.FragmentSearchImageBinding
 import com.electrolux.imagesearchapp.network.model.Photo
 import com.electrolux.imagesearchapp.utils.DebouncingTextChangeListener
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import javax.inject.Inject
 
 @WithFragmentBindings
 @AndroidEntryPoint
@@ -26,13 +25,11 @@ class SearchImageFragment : Fragment(), ImageRVAdapter.OnItemClicked {
     //binding for searching views
     private lateinit var binding: FragmentSearchImageBinding
 
-    @Inject
-    lateinit var picasso: Picasso
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchImageBinding.inflate(inflater)
         return binding.root
     }
@@ -57,7 +54,7 @@ class SearchImageFragment : Fragment(), ImageRVAdapter.OnItemClicked {
     private fun initializeRV() {
 
 
-        val imageRVAdapter = ImageRVAdapter(this,picasso  )
+        val imageRVAdapter = ImageRVAdapter(this  )
         binding.apply {
 
             imageListRV.adapter = imageRVAdapter
@@ -65,12 +62,11 @@ class SearchImageFragment : Fragment(), ImageRVAdapter.OnItemClicked {
                 imageRVAdapter.submitData(viewLifecycleOwner.lifecycle, resource)
             }
         }
-
-        //binding.searchQueryET.setText("Electrolux");
-
     }
 
     override fun onItemClicked(view: View, photoItem: Photo) {
-        TODO("Not yet implemented")
+        //move to detail screen
+        val action = SearchImageFragmentDirections.actionSearchImageFragmentToImageDetailFragment(photoItem)
+        view.findNavController().navigate(action)
     }
 }

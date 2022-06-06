@@ -6,4 +6,7 @@
     <string name="search_images">Search images by type here</string>
     <string name="images_library_using_flikr">Images Library using Flikr</string>
     <string name="results">%1$d results</string>
+    <string name="original_image">original image</string>
+    <string name="is_image_public">Is image public:</string>
+    <string name="title">Title :</string>
 </resources>

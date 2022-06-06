@@ -2,7 +2,11 @@ package com.electrolux.imagesearchapp.network.model
 
 import com.google.gson.annotations.SerializedName
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class Photo (
 
     @SerializedName("id"       ) var id       : String? = null,
@@ -18,4 +22,4 @@ data class Photo (
     @SerializedName("height_m" ) var heightM  : Int?    = null,
     @SerializedName("width_m"  ) var widthM   : Int?    = null
 
-)
+): Parcelable

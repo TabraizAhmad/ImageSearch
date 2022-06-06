@@ -18,5 +18,9 @@
         android:id="@+id/imageDetailFragment"
         android:name="com.electrolux.imagesearchapp.ui.main.imagedetail.ImageDetailFragment"
         android:label="fragment_image_detail"
-        tools:layout="@layout/fragment_image_detail" />
+        tools:layout="@layout/fragment_image_detail" >
+        <argument
+            android:name="photo"
+            app:argType="com.electrolux.imagesearchapp.network.model.Photo" />
+    </fragment>
 </navigation>

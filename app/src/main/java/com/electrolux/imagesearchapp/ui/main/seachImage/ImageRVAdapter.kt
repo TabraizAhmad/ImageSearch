@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.electrolux.imagesearchapp.R
 import com.electrolux.imagesearchapp.databinding.ItemFlikrPhotoBinding
 import com.electrolux.imagesearchapp.network.model.Photo
-import com.squareup.picasso.Picasso
-import javax.inject.Inject
 
 class ImageRVAdapter (
-    private  val itemClickListener: OnItemClicked?,
-    private val picasso: Picasso)
+    private  val itemClickListener: OnItemClicked?)
     : PagingDataAdapter<Photo,ImageRVAdapter.PhotoViewHolder>(PHOTO_ITEM_COMPARATOR) {
 
     interface OnItemClicked{
@@ -49,11 +48,14 @@ class ImageRVAdapter (
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val photoItem = getItem(position)
         photoItem?.apply {
-            picasso
-                 .load(photoItem.urlQ)
+
+            Glide.with(holder.flickrImage)
+                .load(urlQ)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.ic_error)
-                .placeholder(R.drawable.placeholder_img)
                 .into(holder.flickrImage)
+
 
             holder.bindClickListener(this,itemClickListener)
         }
